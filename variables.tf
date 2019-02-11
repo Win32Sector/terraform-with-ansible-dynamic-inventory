@@ -13,3 +13,19 @@ variable "user" {
 variable "password" {
   default = "password"
 }
+
+variable "location" {
+  default = "msk0"
+}
+
+variable "make_from" {
+  default = "ubuntu_14.04_64_002_master"
+}
+
+variable "name" {
+  default = "kozlovpavel"
+}
+
+variable "rplan" {
+  default = "small"
+}

@@ -4,15 +4,15 @@ provider "vscale" {
 
 # Create a web server
 resource "vscale_scalet" "web" {
-  location  = "msk0"
-  make_from = "ubuntu_14.04_64_002_master"
-  name      = "kozlovpavel"
-  rplan     = "small"
+  location  = "${var.location}"
+  make_from = "${var.make_from}"
+  name      = "${var.name}"
+  rplan     = "${var.rplan}"
   ssh_keys  = ["${vscale_ssh_key.kozlovkey1.id}"]
 
   provisioner "remote-exec" {
     inline = [
-      "echo ${var.user}:${file(var.password)} | chpasswd",
+      "echo ${var.user}:`openssl rand -base64 9` | chpasswd",
     ]
 
     connection {
