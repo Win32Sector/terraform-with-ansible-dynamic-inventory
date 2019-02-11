@@ -26,7 +26,7 @@ resource "vscale_scalet" "web" {
 }
 
 resource "random_string" "password" {
-  count = "${length(var.devs)}"
+  count   = "${length(var.devs)}"
   length  = 16
   special = false
 }
@@ -52,4 +52,10 @@ data "template_file" "list_of_devs_instances" {
 
 output "list_of_devs_instances" {
   value = "${data.template_file.list_of_devs_instances.*.rendered}"
+}
+
+resource "local_file" "output_list" {
+    content = "${format("%s", data.template_file.list_of_devs_instances.*.rendered)}"
+    filename = "devs.txt"
+
 }

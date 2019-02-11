@@ -1,0 +1,3 @@
+[{Variable (TypeString):   "dev1.sovvvest.devops.rebrain.srwx.net 185.143.173.147 VceIQYvCRqrXzBae"
+  } {Variable (TypeString):   "dev2.sovvvest.devops.rebrain.srwx.net 37.228.119.243 3tcVauL4OLy53uZJ"
+  }]
