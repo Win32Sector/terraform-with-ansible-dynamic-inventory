@@ -6,6 +6,16 @@ variable "vscale_token" {
   default = "vscale_token"
 }
 
+variable "aws_access_key" {
+  description = "Path to access key"
+  default     = "aws_access_key"
+}
+
+variable "aws_secret_key" {
+  description = "Path to secret key"
+  default     = "aws_secret_key"
+}
+
 variable "user" {
   default = "root"
 }
@@ -28,4 +38,9 @@ variable "name" {
 
 variable "rplan" {
   default = "small"
+}
+
+variable "devs" {
+  type    = "list"
+  default = ["dev1.sovvvest", "dev2.sovvvest"]
 }
