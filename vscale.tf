@@ -55,7 +55,7 @@ output "list_of_devs_instances" {
 }
 
 resource "local_file" "output_list" {
-    content = "${format("%s", data.template_file.list_of_devs_instances.*.rendered)}"
+    content = "${join("\n", data.template_file.list_of_devs_instances.*.rendered)}"
     filename = "devs.txt"
 
 }
