@@ -33,3 +33,4 @@ override.tf.json
 password*
 vscale_*
 aws_*
+devs.txt
