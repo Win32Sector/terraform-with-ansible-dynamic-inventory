@@ -1,3 +1,0 @@
-[hosts]
-
-dev0.sovvvest.devops.rebrain.srwx.net ansible_ssh_private_key_file=~/.ssh/appuser ansible_ssh_user=root
