@@ -2,6 +2,10 @@ variable "vscale_sshkey" {
   default = "~/.ssh/appuser.pub"
 }
 
+variable "vscale_privatesshkey" {
+  default = "~/.ssh/appuser"
+}
+
 variable "vscale_token" {
   default = "vscale_token"
 }
@@ -42,5 +46,5 @@ variable "rplan" {
 
 variable "devs" {
   type    = "list"
-  default = ["dev1.sovvvest", "dev2.sovvvest"]
+  default = ["dev0.sovvvest"]
 }

@@ -1,0 +1,13 @@
+---
+- hosts: hosts
+  tasks:
+    - name: ensure nginx is at the latest version
+      package:
+        name: nginx
+        state: latest
+        update_cache: yes
+    - name: start nginx
+      service:
+          name: nginx
+          state: started
+          enabled: yes

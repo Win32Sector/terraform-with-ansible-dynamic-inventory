@@ -36,26 +36,30 @@ resource "vscale_ssh_key" "kozlovkey1" {
   key  = "${file(var.vscale_sshkey)}"
 }
 
-data "template_file" "list_of_devs_instances" {
+data "template_file" "inventory" {
   count = "${length(var.devs)}"
 
-  template = <<EOF
-  "$${dns_name} $${ip_address} $${root_password}"
-  EOF
+  template = "${file("inventory.tpl")}"
 
   vars = {
-    dns_name      = "${var.devs[count.index % length(var.devs)]}.devops.rebrain.srwx.net"
-    ip_address    = "${vscale_scalet.web.*.public_address[count.index % length(var.devs)]}"
-    root_password = "${random_string.password.*.result[count.index % length(var.devs)]}"
+    dns_name = "${var.devs[count.index % length(var.devs)]}.devops.rebrain.srwx.net"
+    user     = "${var.user}"
+    key_path = "${var.vscale_privatesshkey}"
   }
 }
 
-output "list_of_devs_instances" {
-  value = "${data.template_file.list_of_devs_instances.*.rendered}"
+resource "null_resource" "update_inventory" {
+  triggers {
+    template = "${data.template_file.inventory.rendered}"
+  }
+
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.inventory.rendered}' > ../ansible/inventory"
+  }
 }
 
-resource "local_file" "output_list" {
-    content = "${join("\n", data.template_file.list_of_devs_instances.*.rendered)}"
-    filename = "devs.txt"
-
+resource "null_resource" "playbook_execute" {
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ../ansible/inventory ../ansible/playbook.yml"
+  }
 }
